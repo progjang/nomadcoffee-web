@@ -1,5 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { isLoggedInVar } from "../apollo";
+import { logUserOut } from "../apollo";
 
 const Title = styled.h1`
     color: ${(props) => props.theme.fontColor};
@@ -15,10 +16,11 @@ border-radius: 3px;
 `;
 
 function Home(){
+    const navigate = useNavigate();
     return (
     <>
     <Title>Home</Title>
-    <Button onClick={() => isLoggedInVar(false)}>Logout</Button>
+    <Button onClick={() => logUserOut(navigate)}>Logout</Button>
     </>
     );
 }
