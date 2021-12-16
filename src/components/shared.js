@@ -13,6 +13,8 @@ PageTitle.propTypes = {
     titleName: PropTypes.string.isRequired,
 }
 
+
+
 const SInputError = styled.span`
     color: tomato;
     font-weight: 600;

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { client, darkModeVar, isLoggedInVar } from "./apollo";
 import routes from "./routes";
+import AddShop from "./screens/AddShop";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import NotFound from "./screens/NotFound";
@@ -25,6 +26,7 @@ function App() {
             <Route path={routes.home} element={isLoggedIn ? <Home /> : <Login />} />
             <Route path="/login" element={isLoggedIn ? <Home /> : <Login />} />
             {!isLoggedIn ? (<Route path={routes.signUp} element={<SignUp />} />) : null }
+            {!isLoggedIn ? null : (<Route path={routes.addShop} element={<AddShop />} />) }
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

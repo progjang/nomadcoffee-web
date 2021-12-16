@@ -1,12 +1,9 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import { ApolloClient, InMemoryCache, createHttpLink, makeVar } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import routes from "./routes";
+
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem("token")));
 export const darkModeVar = makeVar(false);
-export const client = new ApolloClient({
-    uri: "http://localhost:4000/graphql",
-    // uri: "https://nomadcoffee-bk.herokuapp.com/graphql",
-    cache: new InMemoryCache(),
-});
 
 export const logUserIn = (token) => {
     localStorage.setItem("token", token)
@@ -18,3 +15,30 @@ export const logUserOut = (navigate) => {
     navigate(routes.home, {replace:true});
     window.location.reload();
 }
+
+const httpLink = createHttpLink({
+    uri:
+      process.env.NODE_ENV === "production"
+        ? "https://nomadcoffee-bk.herokuapp.com/graphql"
+        : "http://localhost:4000/graphql",
+  });
+  
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        token: localStorage.getItem("token"),
+      },
+    };
+  });
+  
+  export const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache({
+      typePolicies: {
+        User: {
+          keyFields: (obj) => `User:${obj.username}`,
+        },
+      },
+    }),
+  });
