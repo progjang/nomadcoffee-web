@@ -41,7 +41,7 @@ const Notification = styled.div`
 function Login(){
   const location = useLocation();
   console.log(location);
-  const {register, watch, handleSubmit, formState, getValues, setError, clearErrors} = useForm({
+  const {register, handleSubmit, formState, getValues, setError, clearErrors} = useForm({
     mode: "onChange",
     defaultValues: {
       username: location?.state?.username || "",

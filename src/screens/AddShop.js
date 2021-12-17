@@ -6,21 +6,14 @@ import FormBox from "../components/auth/FormBox";
 import { InputError, PageTitle } from "../components/shared";
 import { FatLink } from "../components/sharedStyles";
 import styled from "styled-components";
-import {gql, useMutation, useReactiveVar} from "@apollo/client";
-import { useState } from "react";
+import {gql, useMutation} from "@apollo/client";
 
-const Notification = styled.div`
-  color: #2ecc71;
-`;
 const SubTitle = styled(FatLink)`
 font-size: 16px;
 text-align:center;
 margin-bottom: 10px;
 `;
-const Img = styled.img`
-  margin-top: 10px;
-  max-width: 300px;
-`;
+
 const CREATE_COFFEESHOP_MUTATION = gql`
     mutation createCoffeeShop($name:String!, $longitude:String, $latitude:String, $categories:String){
         createCoffeeShop(

@@ -4,10 +4,6 @@ import styled from "styled-components";
 import { logUserOut } from "../apollo";
 import { PageTitle } from "../components/shared";
 
-const Title = styled.h1`
-    color: ${(props) => props.theme.fontColor};
-`;
-
 const Button = styled.button`
 color: palevioletred;
 font-size: 0.5em;
