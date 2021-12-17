@@ -1,5 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logUserOut } from "../apollo";
 import { PageTitle } from "../components/shared";
@@ -20,18 +19,14 @@ const SEE_COFFEESHOPS_QUERY = gql`
 `;
 
 function Home(){
-    const navigate = useNavigate();
-    const onCompleted = (data) => {
-        console.log(data);
-    }
-    const {data, loading} = useQuery(SEE_COFFEESHOPS_QUERY,{onCompleted});
+    const {data, loading} = useQuery(SEE_COFFEESHOPS_QUERY);
 
     return(
         <>
         <PageTitle titleName="Home" />
         {loading ? "Loading" : 
             data?.seeCoffeeShops?.map(shop => <div key={shop.id}>{shop.name}{shop.user.name}</div>)}
-        <Button onClick={() => logUserOut(navigate)}>Logout</Button>
+        <Button onClick={() => logUserOut()}>Logout</Button>
 
     
         </>

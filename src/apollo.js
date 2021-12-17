@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink, makeVar } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { useNavigate } from "react-router-dom";
 import routes from "./routes";
 
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem("token")));
@@ -12,7 +13,7 @@ export const logUserIn = (token) => {
 
 export const logUserOut = (navigate) => {
     localStorage.removeItem("token");
-    navigate(routes.home, {replace:true});
+//    navigate(routes.home, {replace:true});
     window.location.reload();
 }
 
